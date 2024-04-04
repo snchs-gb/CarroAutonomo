@@ -21,6 +21,11 @@ DHT dht(DHTPIN, DHTTYPE);
 
 Adafruit_SSD1306 display = Adafruit_SSD1306();
 
+float temperatura;
+float umidade;
+float distancia;
+float cor;
+
 void setup(){
   pinMode(IR, INPUT);
   dht.begin();
@@ -34,10 +39,10 @@ void setup(){
 }
 
 void loop(){
-  float temperatura = dht.readTemperature();
-  float umidade = dht.readHumidity(); 
-  float distancia = ultrassom.Ranging(CM);
-  float cor = analogRead(IR);
+  temperatura = dht.readTemperature();
+  umidade = dht.readHumidity(); 
+  distancia = ultrassom.Ranging(CM);
+  cor = analogRead(IR);
   
   display.setCursor(1,0);
   display.print("Temperatura: ");
