@@ -14,15 +14,15 @@ Ultra: TRIG = 8 e ECHO = 7
 
 #define DHTPIN A1
 #define DHTTYPE DHT11
-#define InfraVermelho A0
+#define IR A0
 
 Ultrasonic ultrassom(8,7);
 DHT dht(DHTPIN, DHTTYPE);
 
 Adafruit_SSD1306 display = Adafruit_SSD1306();
 
-void setup() {
-  pinMode(InfraVermelho, INPUT);
+void setup(){
+  pinMode(IR, INPUT);
   dht.begin();
   Wire.begin();
   
@@ -33,11 +33,11 @@ void setup() {
   Serial.begin(9600);
 }
 
-void loop() {
+void loop(){
   float temperatura = dht.readTemperature();
   float umidade = dht.readHumidity(); 
   float distancia = ultrassom.Ranging(CM);
-  float cor = analogRead(InfraVermelho);
+  float cor = analogRead(IR);
   
   display.setCursor(1,0);
   display.print("Temperatura: ");
@@ -58,10 +58,9 @@ void loop() {
   display.print("Cor:");
   display.print(cor);
   
-  display.display();
+  display.display(); //send text
   
-  delay(100);
+  delay(100); //01 seg
   
-  display.clearDisplay();
-
+  display.clearDisplay(); //clean display
 }
