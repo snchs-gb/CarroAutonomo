@@ -1,8 +1,10 @@
-//Entradas:
-//Display - Scl = A5 e sda = A4
-//Temperatura A1
-//IR A0
-//Ultra - trig = 8 e echo = 7
+/*
+Conexões
+Display: SCL = A5 e SDA = A4
+DHT11: A1
+IR: A0
+Ultra: TRIG = 8 e ECHO = 7
+*/
 
 #include <Wire.h>
 #include <Adafruit_GFX.h>
