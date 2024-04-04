@@ -60,7 +60,7 @@ void loop(){
   display.print("cm");
   
   display.setCursor(1,21);
-  display.print("Cor:");
+  display.print("Cor: ");
   display.print(cor);
   
   display.display(); //send text
