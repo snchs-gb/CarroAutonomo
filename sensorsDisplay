@@ -1,0 +1,65 @@
+//Entradas:
+//Display - Scl = A5 e sda = A4
+//Temperatura A1
+//IR A0
+//Ultra - trig = 8 e echo = 7
+
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include "DHT.h"
+#include <Ultrasonic.h>
+
+#define DHTPIN A1
+#define DHTTYPE DHT11
+#define InfraVermelho A0
+
+Ultrasonic ultrassom(8,7);
+DHT dht(DHTPIN, DHTTYPE);
+
+Adafruit_SSD1306 display = Adafruit_SSD1306();
+
+void setup() {
+  pinMode(InfraVermelho, INPUT);
+  dht.begin();
+  Wire.begin();
+  
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.setTextColor(WHITE);
+  display.setTextSize(1);
+  display.clearDisplay();
+  Serial.begin(9600);
+}
+
+void loop() {
+  float temperatura = dht.readTemperature();
+  float umidade = dht.readHumidity(); 
+  float distancia = ultrassom.Ranging(CM);
+  float cor = analogRead(InfraVermelho);
+  
+  display.setCursor(1,0);
+  display.print("Temperatura: ");
+  display.print(temperatura);
+  display.print("*C");
+
+  display.setCursor(1,7);
+  display.print("Umidade: ");
+  display.print(umidade);
+  display.print("%");
+  
+  display.setCursor(1,14);
+  display.print("Distancia: ");
+  display.print(distancia);
+  display.print("cm");
+  
+  display.setCursor(1,21);
+  display.print("Cor:");
+  display.print(cor);
+  
+  display.display();
+  
+  delay(100);
+  
+  display.clearDisplay();
+
+}
